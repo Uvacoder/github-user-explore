@@ -1,26 +1,46 @@
 <template>
-  <div>
-    <input v-model="query" v-on:keyup.enter="search" placeholder="Explore GitHub Repository">
+  <v-container>
+    <v-text-field v-model="query" v-on:keyup.enter="search" placeholder="Explore GitHub Repository"></v-text-field>
 
-    <div class="row">
-      <div class="row-md-6">
-        <ul>
-          <li v-for="item in items" :key="item.id">
-            {{ item.name }}
-            <button @click="addStock(item)">Add</button>
-          </li>
-        </ul>
-      </div>
-      <div class="row-md-6">
-        <ul>
-          <li v-for="(stock, index) in stocks" :key="stock.id">
-            {{ stock.name }}
-            <button @click="removeStock(index)">Remove</button>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
+    <v-row>
+      <v-col cols="6">
+        <v-simple-table>
+          <template v-slot:default>
+            <thead>
+              <tr>
+                <th class="text-left">Name</th>
+                <th class="text-left"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in items" :key="item.id"> 
+                <td>{{ item.name }}</td>
+                <td><v-btn x-small @click="addStock(item)">Add</v-btn></td>
+              </tr>
+            </tbody>
+          </template>
+        </v-simple-table>
+      </v-col>
+      <v-col cols="6">
+        <v-simple-table>
+          <template v-slot:default>
+            <thead>
+              <tr>
+                <th class="text-left">Name</th>
+                <th class="text-left"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(stock, index) in stocks" :key="stock.id">
+                <td>{{ stock.name }}</td>
+                <td><v-btn x-small @click="removeStock(index)">Remove</v-btn></td>
+              </tr>
+            </tbody>
+          </template>
+        </v-simple-table>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
