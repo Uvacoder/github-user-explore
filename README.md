@@ -7,6 +7,8 @@
 [![Vue CLI](https://img.shields.io/badge/vuecli-4.5.3-brightgreen)](https://cli.vuejs.org/)
 
 * Search GitHub repositories with Vue.js
+* Choice Repository (Add/Remove stocks)
+* Use [Vuetify](https://vuetifyjs.com/en/)
 
 ## Project setup
 ```
