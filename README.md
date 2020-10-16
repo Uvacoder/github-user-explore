@@ -7,6 +7,7 @@
 [![Vue CLI](https://img.shields.io/badge/vuecli-4.5.3-brightgreen)](https://cli.vuejs.org/)
 
 * Search GitHub repositories with Vue.js
+  * :book: [GitHub Search API](https://docs.github.com/en/free-pro-team@latest/rest/reference/search)
 * Choice Repository (Add/Remove stocks)
 * Use [Vuetify](https://vuetifyjs.com/en/)
 
