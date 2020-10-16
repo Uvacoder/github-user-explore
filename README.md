@@ -9,6 +9,7 @@
 * [Search GitHub repositories](https://docs.github.com/en/free-pro-team@latest/rest/reference/search#search-repositories) with Vue.js
 * Choice Repository (Add/Remove stocks)
 * Use [Vuetify](https://vuetifyjs.com/en/)
+  * [Pagination](https://vuetifyjs.com/en/components/paginations/)
 
 ## Project setup
 ```
