@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-text-field v-model="query" v-on:keyup.enter="search" placeholder="Explore GitHub Repository"></v-text-field>
+    <v-text-field v-model="query" v-on:keyup.enter="initialSearch" placeholder="Explore GitHub Repository"></v-text-field>
 
     <v-row>
       <v-col cols="6">
@@ -40,6 +40,13 @@
         </v-simple-table>
       </v-col>
     </v-row>
+    <div class="text-center">
+      <v-pagination
+        v-model="page"
+        :length="totalPages"
+        :total-visible="7"
+      ></v-pagination>
+    </div>
   </v-container>
 </template>
 
@@ -52,22 +59,42 @@ export default {
     return {
       query: '',
       items: [],
-      stocks: []
+      stocks: [],
+      page: 1,
+      perPage: 10,
+      totalCount: 0,
+    }
+  },
+  computed: {
+    totalPages: function() {
+      return Math.ceil(this.totalCount / this.perPage)
     }
   },
   methods: {
-    search: function() {
+    initialSearch: function() {
+      this.page = 1
       this.stocks = []
+      this.search()
+    },
+    search: function() {
       this.items = []
       axios.create({ baseURL: 'https://api.github.com' })
-        .get('/search/repositories?q=' + this.query)
-        .then(response => (this.items = response.data.items))
+        .get('/search/repositories?q=' + this.query + '&per_page=' + this.perPage + '&page=' + this.page)
+        .then(response => {
+          this.items = response.data.items
+          this.totalCount = Math.min(response.data.total_count, 1000)
+        })
     },
     addStock: function(item) {
       this.stocks.push(item)
     },
     removeStock: function(index) {
       this.stocks.splice(index, 1)
+    }
+  },
+  watch: {
+    page: function() {
+      this.search()
     }
   }
 }
